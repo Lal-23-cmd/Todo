@@ -13,23 +13,36 @@
             padding: 20px;
             background: linear-gradient(135deg, darkgreen, teal);
             min-height: 100vh;
+            color: white;
         }
 
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
+            text-align: center;
         }
 
 
         .input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        #todoInput, #dudeDate {
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid black;
         }
 
         #todoInput {
-            padding: 8px;
-            font-size: 14px;
-            width: 70%;
-            border: 1px solid black;
+            width: 50%;
+        }
+
+        #dueDate {
+            width: 30%;
         }
 
         #addButton {
@@ -38,6 +51,7 @@
             border: 1px solid black;
             background: white;
             cursor: pointer;
+            color: black;
         }
 
 
@@ -55,6 +69,16 @@
             align-items: center;
         }
 
+        .task-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .due-date {
+            font-size: 12px;
+            color: lightyellow;
+        }
+
         .delete-btn {
             padding: 4px 8px;
             font-size: 12px;
@@ -70,6 +94,7 @@
 
     <div class="input-container">
         <input type="text" id="todoInput" placeholder="Enter a task...">
+        <input type="date" id="dueDate">
         <button id="addButton">Add</button>
     </div>
 
@@ -79,11 +104,13 @@
     <script>
 
         const todoInput = document.getElementById('todoInput');
+        const dueDateInput = document.getElementById('dueDate');
         const addButton = document.getElementById('addButton');
         const todoList = document.getElementById('todoList');
 
         function addTodo() {
             const taskText = todoInput.value.trim();
+            const dueDate = dueDateInput.value;
 
             if (taskText === '') {
                 alert('Please enter a task!');
@@ -92,8 +119,21 @@
 
             const li = document.createElement('li');
 
+            const taskInfo = document.createElement('div');
+            taskInfo.className = 'task-info';
+
             const taskSpan = document.createElement('span');
             taskSpan.textContent = taskText;
+
+            const taskSpan = document.createElement('span');
+            taskSpan.textContent = taskText;
+
+            const dateSpan = document.createElement('span');
+            dateSpan.className = 'due-date';
+            dateSpan.textContent = dueDate ? `Due: ${dueDate}` : 'No due date';
+
+            taskInfo.appendChild(taskSpan);
+            taskInfo.appendChild(dateSpan);
 
             const deleteBtn = document.createElement('button');
             deleteBtn.textContent = 'Delete';
@@ -103,7 +143,7 @@
                 li.remove();
             });
 
-            li.appendChild(taskSpan);
+            li.appendChild(taskInfo);
             li.appendChild(deleteBtn);
 
             todoList.appendChild(li);
