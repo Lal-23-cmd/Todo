@@ -125,9 +125,6 @@
             const taskSpan = document.createElement('span');
             taskSpan.textContent = taskText;
 
-            const taskSpan = document.createElement('span');
-            taskSpan.textContent = taskText;
-
             const dateSpan = document.createElement('span');
             dateSpan.className = 'due-date';
             dateSpan.textContent = dueDate ? `Due: ${dueDate}` : 'No due date';
@@ -149,6 +146,7 @@
             todoList.appendChild(li);
 
             todoInput.value = '';
+            dueDateInput.value = '';
 
             todoInput.focus();
         }
